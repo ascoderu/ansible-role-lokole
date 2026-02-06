@@ -1,0 +1,40 @@
+---
+galaxy_info:
+  role_name: lokole
+  namespace: ascoderu
+  author: Ascoderu
+  description: Ansible role for Lokole offline email system - canonical source for IIAB integration
+  license: Apache-2.0
+  
+  min_ansible_version: "2.11"
+  
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal    # 20.04 LTS
+        - jammy    # 22.04 LTS
+        - noble    # 24.04 LTS
+        - oracular # 26.04 (pre-release)
+    - name: Debian
+      versions:
+        - bullseye # 11
+        - bookworm # 12
+        - trixie   # 13
+        - forky    # 14 (pre-release)
+    - name: GenericLinux
+      versions:
+        - any  # Raspberry Pi OS
+  
+  galaxy_tags:
+    - email
+    - offline
+    - iiab
+    - education
+    - developing-countries
+    - low-bandwidth
+    - flask
+    - python
+
+dependencies: []
+  # When used within IIAB context, pylibs role is required
+  # but not declared here to avoid circular dependencies
