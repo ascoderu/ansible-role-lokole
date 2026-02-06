@@ -1,0 +1,40 @@
+---
+# Simple IIAB-style test playbook
+# Run with: ansible-playbook tests/test.yml
+
+- hosts: localhost
+  connection: local
+  become: yes
+  
+  vars:
+    # IIAB variables (provide minimal defaults for standalone testing)
+    content_base: /library
+    etc_path: /etc
+    iiab_hostname: box
+    iiab_domain: lan
+    iiab_state_file: /tmp/test_iiab_state.yml
+    iiab_ini_file: /tmp/test_iiab.ini
+    apache_user: www-data
+    python_version: "3.12"
+    nginx_conf_dir: /etc/nginx/conf.d
+    skip_role_on_error: False
+    lokole_client_id: test-client
+    
+    # Lokole variables
+    lokole_install: True
+    lokole_enabled: True
+    lokole_sim_type: LocalOnly
+    lokole_admin_user: testadmin
+    lokole_admin_password: testpass123
+  
+  pre_tasks:
+    - name: Ensure test state files exist
+      file:
+        path: "{{ item }}"
+        state: touch
+      loop:
+        - "{{ iiab_state_file }}"
+        - "{{ iiab_ini_file }}"
+  
+  roles:
+    - role: ../../ansible-role-lokole
